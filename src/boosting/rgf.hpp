@@ -144,8 +144,14 @@ private:
         int64_t num_score = 0;
         objective_function_->
           GetGradients(GetTrainingScore(&num_score), gradients_.data(), hessians_.data());
-        auto gradients = gradients_.data();
-        auto hessians = hessians_.data();
+        // auto gradients = gradients_.data();
+        // auto hessians = hessians_.data();
+        // for (int i = 0; i < num_data_; ++i) {
+        //   leaf_pred[i] = tree_leaf_prediction[i][model_index];
+        // }
+        size_t bias = static_cast<size_t>(tree_id) * num_data_;
+        auto gradients = gradients_.data() + bias;
+        auto hessians = hessians_.data() + bias;
         auto new_tree = tree_learner_->FitByExistingTree(models_[model_index].get(), gradients, hessians);
         train_score_updater_->AddScore(tree_learner_.get(), new_tree, tree_id);
         models_[model_index].reset(new_tree);
