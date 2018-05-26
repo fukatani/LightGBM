@@ -97,7 +97,7 @@ if(USE_HDFS)
 endif(USE_HDFS)
 
 if(UNIX OR MINGW OR CYGWIN)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -O3 -Wextra -Wall -Wno-ignored-attributes -Wno-unknown-pragmas")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -O2 -g -Wextra -Wall -Wno-ignored-attributes -Wno-unknown-pragmas")
 endif()
 
 if(WIN32 AND MINGW)
@@ -144,7 +144,7 @@ if(USE_MPI)
   include_directories(${MPI_CXX_INCLUDE_PATH})
 endif(USE_MPI)
 
-file(GLOB SOURCES 
+file(GLOB SOURCES
     src/application/*.cpp
     src/boosting/*.cpp
     src/io/*.cpp
