@@ -153,7 +153,7 @@ private:
         size_t bias = static_cast<size_t>(tree_id) * num_data_;
         auto gradients = gradients_.data() + bias;
         auto hessians = hessians_.data() + bias;
-        auto new_tree = tree_learner_->FitByExistingTree(models_[model_index].get(), gradients, hessians);
+        auto new_tree = tree_learner_->FitByExistingTreeIncremental(models_[model_index].get(), gradients, hessians);
         assert(new_tree->num_leaves() == models_[model_index]->num_leaves());
         for (int i = 0; i < new_tree->num_leaves(); ++i) {
           std::cout << "new: " << new_tree->LeafOutput(i) << "old: " << models_[model_index]->LeafOutput(i)
