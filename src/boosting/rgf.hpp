@@ -159,6 +159,7 @@ private:
           std::cout << "new: " << new_tree->LeafOutput(i) << "old: " << models_[model_index]->LeafOutput(i)
                     << std::endl;
         }
+        train_score_updater_->SubtractScore(tree_learner_.get(), models_[model_index].get(), tree_id);
         train_score_updater_->AddScore(tree_learner_.get(), new_tree, tree_id);
         models_[model_index].reset(new_tree);
       }
