@@ -151,7 +151,17 @@ private:
 
         auto inversed_tree = *models_[model_index].get();
         inversed_tree.InvertLeafValue();
+        /*
+        for (int i=0; i < train_score_updater_->num_data(); ++i) {
+          std::cout << "score[" << i << "]: "<< train_score_updater_.score()[i] << std::endl;
+        }
+        */
         UpdateScore(&inversed_tree, tree_id);
+        /*
+        for (int i=0; i < train_score_updater_->num_data(); ++i) {
+          std::cout << "score[" << i << "]: "<< train_score_updater_.score()[i] << std::endl;
+        }
+        */
         models_[model_index].reset(new_tree);
         UpdateScore(new_tree, tree_id);
       }
